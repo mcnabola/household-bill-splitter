@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class algorithm {
 
     public static void main(String args[]){
@@ -10,8 +12,28 @@ public class algorithm {
         //tax on usage
 
         System.out.println("ts");
-        User j = new User("john", 22);
-        System.out.println(j.toString());
+
+        ArrayList<User> housemates = new ArrayList<>();
+        housemates.add( new User("john", 34));
+        housemates.add(new User("mark", 28));
+        housemates.add(new User("victor", 34));
+        housemates.add(new User("olivia", 32));
+        housemates.add(new User("emma", 22));
+
+        double billAmount = 234.76;
+
+        int totalDays=0;
+        for (User r:housemates) {
+            totalDays += r.daysStayed;
+        }
+        System.out.println(totalDays);
+
+        double billPerDay = billAmount / totalDays;
+
+        for (User g:housemates) {
+            g.calcBill(billPerDay);
+            System.out.println(g.toString()); // keep on forgetting to put sout ontop of toString
+        }
 
         //have everyones total days stayed / divide by / bill
 
@@ -21,7 +43,7 @@ public class algorithm {
     public static class User{
 
         String name;
-        int bill;
+        double bill;
 
         int daysStayed;
 
@@ -38,7 +60,15 @@ public class algorithm {
         }
 
         public String toString(){
-            return name + "," + bill;
+            return "Name: " + name + ", Bill: " + bill + ", Days: " + daysStayed;
+        }
+
+        public int getDays(){
+            return daysStayed;
+        }
+
+        public void calcBill(double billPerDay){
+            this.bill = billPerDay * daysStayed;
         }
 
     }
